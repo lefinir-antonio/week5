@@ -25,13 +25,17 @@ var change = true;
 function drawBall() {
     ctx.beginPath();
     ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+    ctx.font = "20px Georgia";  
+//    ctx.fillText("("+ x + ", " + y + ")", x, y);
+    ctx.fillText("("+ x + ", " + y + ")", 30, 30);
     if (!change){
         ctx.fillStyle = "#FF0000";
     }
     else{
-         ctx.fillStyle = "#00FF00";
+         ctx.fillStyle = "#0000FF";
     }
     ctx.fill();
+//    ctx.stroke();
     ctx.closePath();
 }
 
@@ -60,7 +64,7 @@ function draw() {
 
 function startDraw(){
     document.getElementById("myBtn").disabled = true;
-    setInterval(draw, 20);
+    setInterval(draw, 30);
 }
 
 </script>
