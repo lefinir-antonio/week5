@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    canvas { background: #eee; }
+</style>
+<body>
+    <canvas id="myCanvas" width="480" height="320"></canvas>
+    <button id="myBtn" onclick="startDraw()">Start</button>  
+    <audio id="myAudio">
+        <source src="./pina.ogg" type="audio/ogg">
+        <source src="./pina.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>    
+<script>
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+var ballRadius = 10;
+var x = canvas.width/2;
+var y = canvas.height-30;
+var dx = 2;
+var dy = -2;
+var change = true;
+
+function drawBall() {
+    ctx.beginPath();
+    ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+    if (!change){
+        ctx.fillStyle = "#FF0000";
+    }
+    else{
+         ctx.fillStyle = "#00FF00";
+    }
+    ctx.fill();
+    ctx.closePath();
+}
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawBall();
+    
+    if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
+        dx = -dx;
+
+        document.getElementById('myAudio').play();
+        change = false;
+
+    }
+    if(y + dy > canvas.height-ballRadius || y + dy < ballRadius) {
+        dy = -dy;
+
+        document.getElementById('myAudio').play();
+        change = true;
+
+    }
+    
+    x += dx;
+    y += dy;
+}
+
+function startDraw(){
+    document.getElementById("myBtn").disabled = true;
+    setInterval(draw, 20);
+}
+
+</script>
+</body>
+</html>
